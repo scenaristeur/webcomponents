@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>HTML Imports - Testing</title>
+
+		<script>
+			// we wait until the first HTML-Import is loaded an the onload callback at line 18
+			// invokes this function.
+			function loadedB(e) {
+				// call this function which is defined in B.html
+				callMeFrom("A");
+				
+				// we import the content of B.html at the end of this A.html document body.
+				var content = document.querySelector('link[rel="import"]').import;
+				document.body.appendChild(content.body.cloneNode(true));
+			}
+		</script>
+		
+		<!-- Importing B.html and C.html -->
+		<link rel="import" href="B.html" onload="loadedB(event)" />
+		<link rel="import" href="C.html" />
+	</head>
+	
+	<body>
+		The underlying Import-Tree from the official standard is used to test here. Have a look at <a href="http://w3c.github.io/webcomponents/spec/imports/#import-dependent">http://w3c.github.io/webcomponents/spec/imports/#import-dependent</a>.<br />
+		<br />
+		<strong>Without any caching, the <code>console.log()</code> is outputting:</strong>
+		<br />
+		Chrome fetch order: B, C, D, E, G, F, H<br />
+		Chrome execution order: A, F, D, B, H, E, G, C<br />
+		<br />
+		This HTML-Import works only on the newest browser versions in Firefox (Nightly) and Chrome.
+	</body>
+	
+	<script>
+		console.log("A");
+	</script>
+</html>
