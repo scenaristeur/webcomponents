@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>.:: Shadow DOM - insertion points</title>
+	</head>
+	
+	<body>
+		<h2>Shadow DOM: Insertion Points (&lt;shadow&gt;, &lt;content&gt;) selectors Demo</h2>
+	
+		<h3>Result</h3>
+	
+		<div id="shadowHost">
+			<span id="c">1</span>
+			<span class="c">2</span>
+			<span c="true">3</span>
+			<strong>4</strong>
+			<span id="blacksheep">black sheep</span>
+		</div>
+		
+		<h3>Specs!</h3>
+		
+		<p>Have a look at the specs to see more details. This demo covers all the selectors possible with insertion points.</p>
+		<p><a href="http://w3c.github.io/webcomponents/spec/shadow/#distributions">http://w3c.github.io/webcomponents/spec/shadow/#distributions</a></p>
+	</body>
+	
+	<script>
+		var shadowHost = document.querySelector('#shadowHost');
+		var shadowRoot1 = shadowHost.createShadowRoot();
+		var shadowRoot2 = shadowHost.createShadowRoot();
+		var shadowRoot3 = shadowHost.createShadowRoot();
+		
+		shadowRoot1.innerHTML = 'ShadowRoot1 content | ' +
+								'<content select="#c"></content> | ' +
+								'<content select=".c"></content> | ' +
+								'<content select="[c]"></content> | ' +
+								'<content select="strong"></content> | ' +
+								'<content select=":not(#blacksheep)"></content>' +
+								'(left child nodes: <content></content>)';
+		shadowRoot2.innerHTML = 'ShadowRoot2 content | <shadow>All of SR1</shadow>';
+		shadowRoot3.innerHTML = 'ShadowRoot3 content | <shadow>All of SR2</shadow>';
+	</script>
+</html>
