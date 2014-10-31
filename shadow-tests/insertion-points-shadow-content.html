@@ -14,7 +14,7 @@
         <span class="c">2</span>
         <span c="true">3</span>
         <strong>4</strong>
-        <span id="blacksheep">black sheep</span>
+        <span id="fifthchild">5</span>
     </div>
     
     <h3>Specs!</h3>
@@ -34,9 +34,9 @@
                             '<content select=".c"></content> | ' +
                             '<content select="[c]"></content> | ' +
                             '<content select="strong"></content> | ' +
-                            '<content select=":not(#blacksheep)"></content>' +
+                            '<content select=":not(#fifthchild)"></content>' +
                             '(left child nodes: <content></content>)';
-    shadowRoot2.innerHTML = 'ShadowRoot2 content | <shadow>All of SR1</shadow>';
+    shadowRoot2.innerHTML = 'ShadowRoot2 content | <shadow></shadow>';
     shadowRoot3.innerHTML = 'ShadowRoot3 content | <shadow>All of SR2</shadow>';
 </script>
 </html>

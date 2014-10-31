@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>.:: Custom Elements!</title>
+    
+    <style>
+    
+    </style>
+</head>
+
+<body>
+    
+    
+    <script>
+        // namespace
+        var app = {};
+        
+        // 1a) creating custom element (with default HTMLElement prototype)
+        app.foo = document.registerElement('x-foo-1');
+        
+        // 1b) the above is the same as if we would do it like this
+        app.foo = document.registerElement('x-foo-2', {
+            prototype: Object.create(HTMLElement.prototype)
+        });
+        
+        // 2) creating custom element that extends from a <span> element
+        app.bar = document.registerElement('x-span-1', {
+            prototype: Object.create(HTMLSpanElement.prototype),
+            extends: 'span'
+        });
+        
+        // 3) we can also extend from custom elements
+        var xSpanProto = Object.create(HTMLSpanElement.prototype);
+        xSpanProto.callMe = function() {
+            console.log("Hey, I'm xSpanProto");
+        }
+        
+        app.bar = document.registerElement('x-span-extended', {
+            prototype: xSpanProto,
+            extends: 'span'
+        });
+        
+        // we could now use the bar element like so:
+        //   <span is="x-span"><!-- Hey, I'm a 'type extension' of span --></span>
+        // or imperative via javascript:
+        //   var foo = document.createElement('span', 'x-span');
+        
+        // 4) if we want to do add some member attributes on it, we can do it like this
+        app.baz = document.registerElement('x-span-2', {
+            prototype: Object.create(HTMLSpanElement.prototype, {
+                firstMember: {
+                    get: function() {
+                        console.log("baz!");
+                    },
+                    enumerable: true,
+                    configurable: true
+                },
+                // ...
+            }),
+            extends: 'span'
+        });
+    </script>
+</body>
+</html>
